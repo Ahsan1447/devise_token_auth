@@ -43,7 +43,6 @@ module DeviseTokenAuth
     end
 
     def refresh_token
-      create_and_assign_token
     end
 
     def destroy
