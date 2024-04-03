@@ -40,6 +40,10 @@ module DeviseTokenAuth
         @resource.skip_confirmation_notification!
       end
 
+      if @resource.uid.blank?
+        @resource.uid = params[:phone_number]
+      end
+
       if @resource.save
         yield @resource if block_given?
 
@@ -100,7 +104,8 @@ module DeviseTokenAuth
 
     def build_resource
       @resource            = resource_class.new(sign_up_params)
-      @resource.provider   = provider
+
+      @resource.provider   = params[:provider] || provider
 
       # honor devise configuration for case_insensitive_keys
       if resource_class.case_insensitive_keys.include?(:email)
