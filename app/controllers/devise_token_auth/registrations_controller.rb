@@ -42,6 +42,7 @@ module DeviseTokenAuth
 
       if @resource.uid.blank?
         @resource.uid = params[:phone_number]
+        @resource.provider = "mobile"
       end
 
       if @resource.save
