@@ -40,9 +40,12 @@ module DeviseTokenAuth
         @resource.skip_confirmation_notification!
       end
 
-      if @resource.uid.blank?
+      if @resource.uid.blank? && params[:phone_number].present?
         @resource.uid = params[:phone_number]
         @resource.provider = "mobile"
+      elsif params[:email].present?
+        @resource.uid = params[:email].present?
+        @resource.provider = "email"
       end
 
       if @resource.save
