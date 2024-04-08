@@ -42,9 +42,9 @@ module DeviseTokenAuth
 
       if @resource.uid.blank? && params[:phone_number].present?
         @resource.uid = params[:phone_number]
-        @resource.provider = "mobile"
+        @resource.provider = "phone_number"
       elsif params[:email].present?
-        @resource.uid = params[:email].present?
+        @resource.uid = params[:email]
         @resource.provider = "email"
       end
 
